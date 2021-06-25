@@ -1,13 +1,13 @@
 import logoImg from '../assets/images/logo.svg'
 import { Button } from '../common/buttom'
 import '../style/rooms.scss'
-import {RoomCode} from '../pages/RoomCode'
+import {RoomCode} from '../common/RoomCode'
 import {useParams} from 'react-router-dom'
 import { FormEvent, useState,useContext, useEffect } from 'react'
 import {AuthContext} from '../contexts/AuthContexts'
 import { database } from '../services/firebase'
-import { parse } from 'path'
-import { setSyntheticLeadingComments } from 'typescript'
+import { Question } from '../common/Question'
+
 
 type FirebaseQuestions = Record<string,{
     author: {
@@ -143,8 +143,16 @@ export function Rooms(){
                  </div>
              </form>
 
-             {JSON.stringify(quest)}
-         </div>
-        </div>
+        
+                {quest.map(questions =>{
+                    return (
+                        <Question
+                            content = {questions.content}
+                            author = {questions.author}
+                        />
+                    )
+                })}       
+     </div>
+    </div>
     )
 }
